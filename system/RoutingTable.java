@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class RoutingTable {
 	 private HashMap<Node, RoutingTableEntry> table = new HashMap<Node, RoutingTableEntry>();
 	 private HashMap<Node, Link> links = new HashMap<Node, Link>();
+	 private Object lockObject = new Object();
 	 private Node parentNode;
 	 
 	 public RoutingTable(Node n){
@@ -65,15 +66,18 @@ public class RoutingTable {
 	 public void updateTable(HashMap<Node, RoutingTableEntry> update, Node sender){
 		 if(update != null){
 			 for(Node n : update.keySet()){
-				 if(!table.containsKey(n)){
-					 try{
-						 table.put(n, new RoutingTableEntry(n, sender, update.get(n).getCost() + table.get(sender).getCost()));
-					 } catch (Exception e){
-						 e.printStackTrace();
-					 }
-				 }else{
-					 if(update.get(n).getCost() + table.get(sender).getCost() < table.get(n).getCost()){
-						 table.put(n, new RoutingTableEntry(n, sender, update.get(n).getCost() + table.get(sender).getCost()));
+				 //TODO : The following test of the sender is a workaround, need to ensure that all neighbors are always in the routing table
+				 if(table.containsKey(sender)){
+					 if(!table.containsKey(n)){
+						 try{
+						 	table.put(n, new RoutingTableEntry(n, sender, update.get(n).getCost() + table.get(sender).getCost()));
+						 }catch (Exception e ){
+							 e.printStackTrace();
+						 }
+					 }else{
+						 if(update.get(n).getCost() + table.get(sender).getCost() < table.get(n).getCost()){
+							 table.put(n, new RoutingTableEntry(n, sender, update.get(n).getCost() + table.get(sender).getCost()));
+						 }
 					 }
 				 }
 			 }
