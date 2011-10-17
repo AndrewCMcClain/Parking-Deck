@@ -66,7 +66,11 @@ public class RoutingTable {
 		 if(update != null){
 			 for(Node n : update.keySet()){
 				 if(!table.containsKey(n)){
-					 table.put(n, new RoutingTableEntry(n, sender, update.get(n).getCost() + table.get(sender).getCost()));
+					 try{
+						 table.put(n, new RoutingTableEntry(n, sender, update.get(n).getCost() + table.get(sender).getCost()));
+					 } catch (Exception e){
+						 e.printStackTrace();
+					 }
 				 }else{
 					 if(update.get(n).getCost() + table.get(sender).getCost() < table.get(n).getCost()){
 						 table.put(n, new RoutingTableEntry(n, sender, update.get(n).getCost() + table.get(sender).getCost()));
