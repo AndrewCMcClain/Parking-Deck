@@ -24,10 +24,6 @@ public class NodeHelper implements Runnable, ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Firing update for " + parent.getName());
-		System.out.println("Updating link costs of " + parent.getName());
-		System.out.println("Setting Random Backoff for" + parent.getName());
-		int backoff = 1000 * (30 + (((int) Math.random())*10) - 5);
 		t.setDelay(getBackoff());
 		parent.BroadcastUpdates();
 	}

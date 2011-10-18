@@ -1,6 +1,7 @@
 package system;
 
 import java.util.HashSet;
+import java.util.Random;
 
 public class SimulatedSensorManager implements SensorManager {
 	private HashSet<Node> nodes = new HashSet<Node>();
@@ -22,6 +23,10 @@ public class SimulatedSensorManager implements SensorManager {
 	}
 	
 	public void updateCostsAndSpots(){
-		System.out.println("Updating links and nodes.");
+		Random r = new Random();
+		for(Link l : links){
+			l.setLeftCost((double) Math.round(r.nextDouble() * 50));
+			l.setRightCost((double) Math.round(r.nextDouble() * 50));
+		}
 	}
 }

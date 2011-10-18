@@ -12,7 +12,7 @@ public class SimulatedSensorManagerHelper implements Runnable, ActionListener{
 	private Timer t;
 	public SimulatedSensorManagerHelper(SimulatedSensorManager s){
 		parent = s;
-		t = new Timer(3000, this);
+		t = new Timer(10000, this);
 	}
 	
 	@Override
