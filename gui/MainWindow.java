@@ -23,6 +23,7 @@ public class MainWindow extends JFrame{
 	
 	private MainWindow(){
 		this.setTitle("Parking Deck Administrator");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(800, 600));
 		systemMain = new SystemMain();
 	}
