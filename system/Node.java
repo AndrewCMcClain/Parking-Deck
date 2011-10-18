@@ -20,6 +20,7 @@ public class Node implements Comparable{
 		currentDestination = null;
 		lastDestinationChange = new Date(0);
 		SensorFactory.getSensorManager().newNode(this);
+		NodeManager.getNodeManager().registerNode(this);
 	}
 	
 	public void AddLink(Node n, Link l){

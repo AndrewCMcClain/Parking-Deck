@@ -18,6 +18,7 @@ public class Link {
 		SensorFactory.getSensorManager().newLink(this);
 		leftNode.AddLink(rightNode, this);
 		rightNode.AddLink(leftNode, this);
+		LinkManager.getLinkManager().registerLink(this);
 	}
 	
 	public void setLeftNode(Node n){
